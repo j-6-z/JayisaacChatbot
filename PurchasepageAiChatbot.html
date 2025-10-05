@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17580740260"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-17580740260');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://*.paypal.com https://*.paypalobjects.com https://*.googletagmanager.com; style-src 'self' 'unsafe-inline' https://*.paypal.com; connect-src 'self' https://*.paypal.com https://*.google-analytics.com; frame-src https://*.paypal.com; img-src 'self' https://*.paypal.com https://*.paypalobjects.com">
+    <title>Secure Payment - JAYISAAC AI</title>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AVfxjhJAhYSue2TTHcvNhb7LoTSrEVk6kWodaoSFiNENTggt_yo67S5uGrXz1o7CMz5gPn27BPU1ovYe&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        }
+        body {
+            background: #f6f9fc;
+            color: #32325d;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        header {
+            background: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .logo img {
+            height: 50px;
+            transition: transform 0.2s ease;
+        }
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+        .logo span {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #32325d;
+            letter-spacing: -0.02em;
+        }
+        nav ul {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            justify-content: center;
+        }
+        nav a {
+            color: #6b7c93;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: color 0.2s ease, background 0.2s ease;
+        }
+        nav a:hover {
+            background: #f6f9fc;
+            color: #32325d;
+        }
+        .order-container {
+            background: #ffffff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            max-width: 1000px;
+            margin: 6rem auto 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #32325d;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.01em;
+        }
+        .order-section {
+            margin-bottom: 2.5rem;
+        }
+        .order-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #32325d;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.01em;
+        }
+        .order-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .option {
+            background: #ffffff;
+            padding: 1.75rem;
+            border-radius: 8px;
+            border: 1px solid #e6ebf1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            color: #32325d;
+        }
+        .subscription-option, .one-time-option {
+            background: #ffffff;
+        }
+        .option:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-color: #d0d5dd;
+        }
+        .option.selected {
+            border: 2px solid #635bff;
+            box-shadow: 0 4px 12px rgba(99, 91, 255, 0.15);
+        }
+        .option.selected.subscription-option {
+            background: #f7f9fe;
+            color: #32325d;
+        }
+        .option.selected.one-time-option {
+            background: #f8f9fa;
+            color: #32325d;
+        }
+        .option label {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: block;
+            color: #32325d;
+            letter-spacing: -0.01em;
+        }
+        .option p {
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: #6b7c93;
+            line-height: 1.6;
+        }
+        .paypal-container {
+            display: none;
+            margin-top: 1rem;
+            text-align: center;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .paypal-container.pay-enabled form,
+        .paypal-container.pay-enabled .paypal-buttons {
+            pointer-events: auto;
+            opacity: 1;
+        }
+        .paypal-container:not(.pay-enabled) form,
+        .paypal-container:not(.pay-enabled) .paypal-buttons {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        .pp-XHPFJVWAM9WPQ,
+        .pp-575Q9EWCMRCMN,
+        .pp-QXKV5VZLJVHE2 {
+            text-align: center;
+            border: none;
+            border-radius: 1.5rem;
+            min-width: 11.625rem;
+            padding: 0 2rem;
+            height: 2rem;
+            font-weight: bold;
+            background-color: #000000;
+            color: #ffffff;
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            font-size: 0.875rem;
+            line-height: 1.125rem;
+            cursor: pointer;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+            position: relative;
+        }
+        .form-group label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #6b7c93;
+            position: absolute;
+            top: 0.8rem;
+            left: 1rem;
+            transition: all 0.2s ease;
+            pointer-events: none;
+            background: transparent;
+        }
+        .form-group input:focus + label,
+        .form-group select:focus + label,
+        .form-group input:not(:placeholder-shown) + label,
+        .form-group select:not(:placeholder-shown) + label {
+            top: -0.6rem;
+            left: 0.8rem;
+            font-size: 0.75rem;
+            color: #635bff;
+            background: #ffffff;
+            padding: 0 0.2rem;
+        }
+        input, select {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #e6ebf1;
+            border-radius: 6px;
+            background: #ffffff;
+            font-size: 1rem;
+            font-weight: 400;
+            color: #32325d;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #635bff;
+            box-shadow: 0 0 0 2px rgba(99, 91, 255, 0.1);
+        }
+        input::placeholder {
+            color: transparent;
+        }
+        select {
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4z" fill="%236b7c93"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 0.8rem center;
+            cursor: pointer;
+        }
+        .price-display {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #32325d;
+            margin: 1.5rem 0;
+            letter-spacing: -0.01em;
+        }
+        .error-message {
+            color: #e2594c;
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+        .invalid-input {
+            border-color: #e2594c;
+        }
+        .field-group {
+            display: none;
+        }
+        .field-group.active {
+            display: block;
+        }
+        footer {
+            padding: 2rem;
+            text-align: left;
+            position: relative;
+            z-index: 800;
+            border-top: 1px solid #e5e7eb;
+            margin-top: 2rem;
+        }
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2rem;
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+        .footer-company {
+            flex: 1;
+        }
+        .footer-company .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .footer-company .footer-logo img {
+            height: 40px;
+            transition: transform 0.3s ease;
+        }
+        .footer-company .footer-logo img:hover {
+            transform: rotate(360deg);
+        }
+        .footer-company .footer-logo span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #000000;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .footer-company p {
+            font-size: 0.875rem;
+            color: #4b5563;
+            max-width: 250px;
+        }
+        .footer-terms {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .footer-terms a {
+            color: #000000;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.3s ease;
+        }
+        .footer-terms a:hover {
+            color: #4b5563;
+        }
+        @media (max-width: 768px) {
+            .order-container {
+                padding: 1.5rem;
+                margin: 5rem auto 1rem;
+                max-width: 95%;
+            }
+            h1 {
+                font-size: 1.875rem;
+            }
+            .order-section h2 {
+                font-size: 1.25rem;
+            }
+            .order-options {
+                grid-template-columns: 1fr;
+            }
+            .option label {
+                font-size: 1.125rem;
+            }
+            .option p {
+                font-size: 0.875rem;
+            }
+            .form-group label {
+                font-size: 0.8rem;
+            }
+            input, select {
+                font-size: 0.95rem;
+                padding: 0.875rem;
+            }
+            .form-group input:focus + label,
+            .form-group select:focus + label,
+            .form-group input:not(:placeholder-shown) + label,
+            .form-group select:not(:placeholder-shown) + label {
+                top: -0.5rem;
+                font-size: 0.7rem;
+            }
+            .price-display {
+                font-size: 1.125rem;
+            }
+            nav ul {
+                gap: 1rem;
+            }
+            nav a {
+                font-size: 0.875rem;
+                padding: 0.4rem 0.75rem;
+            }
+            .logo span {
+                font-size: 1.25rem;
+            }
+            .logo img {
+                height: 40px;
+            }
+            footer {
+                padding: 1rem;
+            }
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-company, .footer-terms {
+                text-align: center;
+            }
+            .footer-terms {
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="images/chtabot lololol.jpg" alt="AI Chatbot Logo">
+                <span>JAYISAAC AI AUTOMATION</span>
+            </div>
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="order-container">
+        <h1>Secure Payment</h1>
+        <div class="order-section">
+            <h2>Subscription Plans</h2>
+            <div class="order-options">
+                <div class="option subscription-option" data-plan="basic-monthly">
+                    <label>Basic Monthly Subscription</label>
+                    <p>$49/month - Custom chatbot, core features, single-platform integration, up to 1,000 conversations, 6 months email support.</p>
+                </div>
+                <div class="option subscription-option" data-plan="standard-monthly">
+                    <label>Standard Monthly Subscription</label>
+                    <p>$149/month - Advanced AI, multi-platform support (web, mobile, WhatsApp), up to 5,000 conversations, 1 year priority support.</p>
+                </div>
+                <div class="option subscription-option" data-plan="enterprise-monthly">
+                    <label>Enterprise Monthly Subscription</label>
+                    <p>$499/month - Fully custom chatbot, integrations (Salesforce, Shopify), unlimited conversations, dedicated support, analytics.</p>
+                </div>
+            </div>
+        </div>
+        <div class="order-section">
+            <h2>One-Time Purchase Plans</h2>
+            <div class="order-options">
+                <div class="option one-time-option selected" data-plan="basic-purchase">
+                    <label>Basic One-Time Purchase</label>
+                    <p>$799 - Custom chatbot, lifetime access (self-hosted), 1 year basic support.</p>
+                </div>
+                <div class="option one-time-option" data-plan="standard-purchase">
+                    <label>Standard One-Time Purchase</label>
+                    <p>$9,999 - Advanced AI, multi-platform support (web, mobile, Slack), 2 years updates.</p>
+                </div>
+                <div class="option one-time-option" data-plan="enterprise-purchase">
+                    <label>Enterprise One-Time Purchase</label>
+                    <p>$24,999 - Fully custom solution, integrations (HubSpot, Zendesk), scalability, 3+ years support.</p>
+                </div>
+            </div>
+        </div>
+        <form id="order-form">
+            <input type="hidden" id="selected-plan" name="plan" value="basic-purchase">
+            <input type="hidden" id="plan-type" name="plan-type" value="one-time">
+            <div class="form-group">
+                <select id="account-type" name="account-type" required>
+                    <option value="" disabled selected>Select Account Type</option>
+                    <option value="personal">Personal</option>
+                    <option value="business">Business</option>
+                </select>
+                <label for="account-type">Account Type</label>
+                <div class="error-message" id="account-type-error">Please select an account type.</div>
+            </div>
+            <div id="personal-fields" class="field-group">
+                <div class="form-group">
+                    <input type="text" id="personal-name" name="personal-name" placeholder=" " required>
+                    <label for="personal-name">Full Name</label>
+                    <div class="error-message" id="personal-name-error">Please enter your full name.</div>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="personal-email" name="personal-email" placeholder=" " required>
+                    <label for="personal-email">Email</label>
+                    <div class="error-message" id="personal-email-error">Please enter a valid email address.</div>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="personal-verify-email" name="personal-verify-email" placeholder=" " required>
+                    <label for="personal-verify-email">Verify Email</label>
+                    <div class="error-message" id="personal-verify-email-error">Emails do not match.</div>
+                </div>
+                <div class="form-group">
+                    <input type="url" id="personal-website-url" name="personal-website-url" placeholder=" ">
+                    <label for="personal-website-url">Website URL (Optional)</label>
+                    <div class="error-message" id="personal-website-url-error">Please enter a valid URL.</div>
+                </div>
+            </div>
+            <div id="business-fields" class="field-group">
+                <div class="form-group">
+                    <input type="text" id="business-company-name" name="business-company-name" placeholder=" " required>
+                    <label for="business-company-name">Company Name</label>
+                    <div class="error-message" id="business-company-name-error">Please enter your company name.</div>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="business-email" name="business-email" placeholder=" " required>
+                    <label for="business-email">Business Email</label>
+                    <div class="error-message" id="business-email-error">Please enter a valid business email address.</div>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="business-verify-email" name="business-verify-email" placeholder=" " required>
+                    <label for="business-verify-email">Verify Business Email</label>
+                    <div class="error-message" id="business-verify-email-error">Business emails do not match.</div>
+                </div>
+                <div class="form-group">
+                    <input type="url" id="business-website-url" name="business-website-url" placeholder=" ">
+                    <label for="business-website-url">Website URL (Optional)</label>
+                    <div class="error-message" id="business-website-url-error">Please enter a valid URL.</div>
+                </div>
+            </div>
+            <div class="price-display" id="price-display">You will be charged: CAD $799</div>
+        </form>
+        <div class="paypal-container" id="paypal-container"></div>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-company">
+                <div class="footer-logo">
+                    <img src="images/chtabot lololol.jpg" alt="AI Chatbot Logo">
+                    <span>JAYISAAC AI AUTOMATION</span>
+                </div>
+                <p>Revolutionizing automation with AI chatbots tailored to your needs. Contact us at admin@jayisaacai.com</p>
+            </div>
+            <div class="footer-terms">
+                <a href="/TOS_SUCH.html">Terms of Service</a>
+                <a href="/TOS_SUCH.html">Privacy Policy</a>
+                <a href="/TOS_SUCH.html">Cookie Policy</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize particles.js
+            if (window.particlesJS) {
+                particlesJS('particles-js', {
+                    particles: {
+                        number: { value: 60, density: { enable: true, value_area: 800 } },
+                        color: { value: '#635bff' },
+                        shape: { type: 'circle' },
+                        opacity: { value: 0.3, random: true },
+                        size: { value: 2, random: true },
+                        line_linked: { enable: true, distance: 120, color: '#635bff', opacity: 0.2, width: 1 },
+                        move: { enable: true, speed: 1, direction: 'none', random: true }
+                    },
+                    interactivity: {
+                        detect_on: 'canvas',
+                        events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } },
+                        modes: { repulse: { distance: 80 }, push: { particles_nb: 3 } }
+                    },
+                    retina_detect: true
+                });
+            }
+            // Fade-in animation
+            const orderContainer = document.querySelector('.order-container');
+            orderContainer.style.opacity = 0;
+            orderContainer.style.transform = 'translateY(20px)';
+            orderContainer.style.transition = 'all 0.6s ease-out';
+            setTimeout(() => {
+                orderContainer.style.opacity = 1;
+                orderContainer.style.transform = 'translateY(0)';
+            }, 100);
+
+            // Plan selection and form validation
+            const planOptions = document.querySelectorAll('.option');
+            const selectedPlanInput = document.getElementById('selected-plan');
+            const planTypeInput = document.getElementById('plan-type');
+            const priceDisplay = document.getElementById('price-display');
+            const paypalContainer = document.getElementById('paypal-container');
+            const accountTypeSelect = document.getElementById('account-type');
+            const personalFields = document.getElementById('personal-fields');
+            const businessFields = document.getElementById('business-fields');
+
+            function getPlanDetails(planValue) {
+                const plans = {
+                    'basic-monthly': { amount: 4900, priceText: '$49/month', type: 'subscription', paypalId: 'P-6VF10848V2487410NNDE3Y5A' },
+                    'standard-monthly': { amount: 14900, priceText: '$149/month', type: 'subscription', paypalId: 'P-24M92406D46068305NDE3ZOI' },
+                    'enterprise-monthly': { amount: 49900, priceText: '$499/month', type: 'subscription', paypalId: 'P-7S597632MR070600RNDE327Q' },
+                    'basic-purchase': { amount: 79900, priceText: '$799', type: 'one-time', paypalId: 'XHPFJVWAM9WPQ' },
+                    'standard-purchase': { amount: 999900, priceText: '$9,999', type: 'one-time', paypalId: '575Q9EWCMRCMN' },
+                    'enterprise-purchase': { amount: 2499900, priceText: '$24,999', type: 'one-time', paypalId: 'QXKV5VZLJVHE2' }
+                };
+                return plans[planValue] || { amount: 0, priceText: 'Unknown', type: 'one-time', paypalId: '' };
+            }
+
+            function validateField(field) {
+                const errorId = field.id + '-error';
+                const errorElement = document.getElementById(errorId);
+                if (errorElement) {
+                    if (field.validity.valid && field.value.trim() !== '') {
+                        errorElement.style.display = 'none';
+                        field.classList.remove('invalid-input');
+                        return true;
+                    } else if (field.hasAttribute('required') && field.value.trim() === '') {
+                        errorElement.style.display = 'block';
+                        field.classList.add('invalid-input');
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            function validateEmails(emailField, verifyField, errorId) {
+                const errorElement = document.getElementById(errorId);
+                if (emailField && verifyField && errorElement) {
+                    if (emailField.value.trim() === verifyField.value.trim() && emailField.validity.valid) {
+                        errorElement.style.display = 'none';
+                        verifyField.classList.remove('invalid-input');
+                        return true;
+                    } else {
+                        errorElement.style.display = 'block';
+                        verifyField.classList.add('invalid-input');
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            function validateUrl(field) {
+                const errorId = field.id + '-error';
+                const errorElement = document.getElementById(errorId);
+                if (errorElement) {
+                    if (field.value.trim() === '' || /^https?:\/\/[^\s/$.?#].[^\s]*$/.test(field.value.trim())) {
+                        errorElement.style.display = 'none';
+                        field.classList.remove('invalid-input');
+                        return true;
+                    } else {
+                        errorElement.style.display = 'block';
+                        field.classList.add('invalid-input');
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            function validateForm() {
+                const accountType = accountTypeSelect.value;
+                let isValid = true;
+
+                if (!accountType) {
+                    validateField(accountTypeSelect);
+                    isValid = false;
+                }
+
+                if (accountType === 'personal') {
+                    const name = document.getElementById('personal-name');
+                    const email = document.getElementById('personal-email');
+                    const verifyEmail = document.getElementById('personal-verify-email');
+                    const websiteUrl = document.getElementById('personal-website-url');
+
+                    isValid = validateField(name) && isValid;
+                    isValid = validateField(email) && isValid;
+                    isValid = validateEmails(email, verifyEmail, 'personal-verify-email-error') && isValid;
+                    if (websiteUrl.value.trim() !== '') isValid = validateUrl(websiteUrl) && isValid;
+                } else if (accountType === 'business') {
+                    const companyName = document.getElementById('business-company-name');
+                    const businessEmail = document.getElementById('business-email');
+                    const businessVerifyEmail = document.getElementById('business-verify-email');
+                    const businessWebsiteUrl = document.getElementById('business-website-url');
+
+                    isValid = validateField(companyName) && isValid;
+                    isValid = validateField(businessEmail) && isValid;
+                    isValid = validateEmails(businessEmail, businessVerifyEmail, 'business-verify-email-error') && isValid;
+                    if (businessWebsiteUrl.value.trim() !== '') isValid = validateUrl(businessWebsiteUrl) && isValid;
+                }
+
+                paypalContainer.classList.toggle('pay-enabled', isValid);
+                return isValid;
+            }
+
+            function toggleFields() {
+                const accountType = accountTypeSelect.value;
+                personalFields.classList.toggle('active', accountType === 'personal');
+                businessFields.classList.toggle('active', accountType === 'business');
+                const personalInputs = personalFields.querySelectorAll('input');
+                const businessInputs = businessFields.querySelectorAll('input');
+                if (accountType === 'personal') {
+                    personalInputs.forEach(input => {
+                        if (input.id !== 'personal-website-url') input.setAttribute('required', '');
+                        else input.removeAttribute('required');
+                    });
+                    businessInputs.forEach(input => {
+                        input.removeAttribute('required');
+                        input.value = ''; // Clear business fields
+                        const errorElement = document.getElementById(input.id + '-error');
+                        if (errorElement) {
+                            errorElement.style.display = 'none';
+                            input.classList.remove('invalid-input');
+                        }
+                    });
+                } else if (accountType === 'business') {
+                    personalInputs.forEach(input => {
+                        input.removeAttribute('required');
+                        input.value = ''; // Clear personal fields
+                        const errorElement = document.getElementById(input.id + '-error');
+                        if (errorElement) {
+                            errorElement.style.display = 'none';
+                            input.classList.remove('invalid-input');
+                        }
+                    });
+                    businessInputs.forEach(input => {
+                        if (input.id !== 'business-website-url') input.setAttribute('required', '');
+                        else input.removeAttribute('required');
+                    });
+                }
+                validateForm();
+            }
+
+            accountTypeSelect.addEventListener('change', toggleFields);
+            toggleFields();
+
+            // Real-time validation
+            const fields = document.querySelectorAll('input, select');
+            fields.forEach(field => {
+                field.addEventListener('input', () => {
+                    if (field.id === 'personal-website-url' || field.id === 'business-website-url') {
+                        validateUrl(field);
+                    } else if (field.id.includes('verify-email') || field.id.includes('email')) {
+                        const baseId = field.id.includes('verify-') ? field.id.replace('verify-', '') : field.id;
+                        const emailField = document.getElementById(baseId);
+                        const verifyField = document.getElementById(baseId.includes('personal') ? 'personal-verify-email' : 'business-verify-email');
+                        validateEmails(emailField, verifyField, `${baseId}-verify-email-error`);
+                    } else {
+                        validateField(field);
+                    }
+                    validateForm();
+                });
+            });
+
+            // PayPal button rendering
+            function renderPayPalButton(planValue, paypalId) {
+                paypalContainer.innerHTML = '';
+
+                if (planValue.startsWith('basic-monthly') || planValue.startsWith('standard-monthly') || planValue.startsWith('enterprise-monthly')) {
+                    paypalContainer.innerHTML = `<div id="paypal-button-container-${paypalId}"></div>`;
+                    paypal.Buttons({
+                        style: {
+                            shape: 'pill',
+                            color: 'black',
+                            layout: 'vertical',
+                            label: 'subscribe'
+                        },
+                        createSubscription: function(data, actions) {
+                            return actions.subscription.create({
+                                plan_id: paypalId
+                            });
+                        },
+                        onApprove: function(data, actions) {
+                            const formData = new FormData(document.getElementById('order-form'));
+                            formData.append('subscriptionID', data.subscriptionID);
+                            formData.append('plan', planValue);
+                            fetch('/your-backend-endpoint', {
+                                method: 'POST',
+                                body: formData
+                            }).then(response => response.json()).then(data => {
+                                console.log('Subscription created:', data);
+                                alert('Subscription successful! Subscription ID: ' + data.subscriptionID);
+                            }).catch(err => {
+                                console.error('Error submitting form:', err);
+                                alert('Error processing subscription. Please try again.');
+                            });
+                        },
+                        onError: function(err) {
+                            console.error('PayPal error:', err);
+                            alert('An error occurred during payment. Please try again.');
+                        }
+                    }).render(`#paypal-button-container-${paypalId}`);
+                } else {
+                    const forms = {
+                        'XHPFJVWAM9WPQ': `
+                            <form action="https://www.paypal.com/ncp/payment/XHPFJVWAM9WPQ" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+                                <input class="pp-XHPFJVWAM9WPQ" type="submit" value="Pay Now" />
+                                <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
+                                <section style="font-size: 0.75rem;"> Powered by <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+                            </form>
+                        `,
+                        '575Q9EWCMRCMN': `
+                            <form action="https://www.paypal.com/ncp/payment/575Q9EWCMRCMN" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+                                <input class="pp-575Q9EWCMRCMN" type="submit" value="Buy Now" />
+                                <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
+                                <section style="font-size: 0.75rem;"> Powered by <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+                            </form>
+                        `,
+                        'QXKV5VZLJVHE2': `
+                            <form action="https://www.paypal.com/ncp/payment/QXKV5VZLJVHE2" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+                                <input class="pp-QXKV5VZLJVHE2" type="submit" value="Pay Now" />
+                                <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
+                                <section style="font-size: 0.75rem;"> Powered by <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+                            </form>
+                        `
+                    };
+                    paypalContainer.innerHTML = forms[paypalId] || '';
+                    const form = paypalContainer.querySelector('form');
+                    if (form) {
+                        form.addEventListener('submit', async (e) => {
+                            try {
+                                const formData = new FormData(document.getElementById('order-form'));
+                                formData.append('plan', planValue);
+                                const response = await fetch('/your-backend-endpoint', {
+                                    method: 'POST',
+                                    body: formData
+                                });
+                                if (!response.ok) throw new Error('Network response was not ok');
+                                const data = await response.json();
+                                console.log('Form data submitted:', data);
+                            } catch (err) {
+                                console.error('Error submitting form:', err);
+                            }
+                        });
+                    }
+                }
+                paypalContainer.style.display = 'block';
+            }
+
+            planOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const planValue = option.getAttribute('data-plan');
+                    const planDetails = getPlanDetails(planValue);
+                    selectedPlanInput.value = planValue;
+                    planTypeInput.value = planDetails.type;
+                    priceDisplay.textContent = `You will be charged: CAD ${planDetails.priceText}`;
+                    planOptions.forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                    renderPayPalButton(planValue, planDetails.paypalId);
+                    validateForm();
+                });
+            });
+
+            const initialOption = document.querySelector('.option.selected');
+            if (initialOption) {
+                const initialPlan = initialOption.getAttribute('data-plan');
+                const initialDetails = getPlanDetails(initialPlan);
+                selectedPlanInput.value = initialPlan;
+                planTypeInput.value = initialDetails.type;
+                priceDisplay.textContent = `You will be charged: CAD ${initialDetails.priceText}`;
+                renderPayPalButton(initialPlan, initialDetails.paypalId);
+                validateForm();
+            }
+        });
+    </script>
+</body>
+</html>
